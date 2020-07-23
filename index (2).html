@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Vue基础</title>
+</head>
+
+<body id="body">
+    {{message}}
+    <div id="app">
+        {{message}}
+        <span>
+            {{message3}}
+        </span>
+        <h2>{{school.name}} {{school.mobile}}</h2>
+        <ul>
+            <li>{{campus[0]}}</li>
+            <li>{{campus[1]}}</li>
+        </ul>
+        <div>{{test}}</div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Hello Vue23",
+                message3: "Hello3",
+                school: {
+                    name:"黑马程序猿",
+                    mobile: "1111111111"
+
+                },
+                campus:["北京", "上海"],
+                test:1222
+            }
+
+        })
+    </script>
+</body>
+
+</html>

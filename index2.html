@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <title>Vue基础</title>
+    <style>
+        .size{
+
+            width:300px;height:300px 
+        }
+        .active {
+            border: 1px solid red;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <h2 v-text="message+'!!'">深圳{{message}}</h2>
+        <h2 v-text="info+'!!'"></h2>
+        <h2>深圳{{message+'!!'}}</h2>
+
+
+        <p v-html="content"></p>
+        <p v-text="content"></p>
+
+        <input type="button" value="v-on指令" v-on:click="doIt">
+        <input type="button" value="v-on指令" @click="doIt">
+
+        <input type="button" value="双击事件" v-on:dblclick="doIt">
+
+        <h2 @click="changeFood">{{food}}</h2>
+
+
+        <div>
+            <button @click="sub"></button>
+            <span>{{num}}</span>
+            <button @click="add"></button>
+        </div>
+
+        <!-- v-show的值为布尔值 -->
+        <img class="size" src="img/git流程.png" alt="" v-show="isShow">
+        <img class="size" src="img/git流程.png" alt="" v-show="age>16">
+        <input type="button" value="切换图片显隐状态" @click="changeIsShow">
+
+        <!-- v-if的值也为布尔值，与v-show区别是操作dom树，而v-show是display样式显隐 -->
+        <p>黑马程序猿</p>
+
+
+        <!-- v-bind 操作元素的属性 如class、src等等-->
+        <img class="size"  v-bind:src="imgSrc" alt="">
+         <!-- 方法1 :class 三元表达式-->
+        <img :class="isActive?'active':''" class="size" :src="imgSrc" alt="" :title="imgTitle" @click="toggleActive">
+        <!-- 方法1 :class 绑定属性-->
+        <img :class="{active:isActive}" class="size" :src="imgSrc" alt="" :title="imgTitle" @click="toggleActive">
+  
+  
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Hello Vue223",
+                info: "前端练习",
+                // content: "练习",
+                content: "<a href='http://www.baidu.com'>练习</a>",
+
+                food: "西蓝花",
+
+                num: 1,
+
+                isShow: true,
+                age: 18,
+
+                imgSrc: "img/git流程.png",
+                imgTitle: "我是图片标题",
+                isActive: false
+
+
+
+            },
+            methods: {
+                doIt: function () {
+                    alert("click");
+                },
+
+                changeFood: function () {
+                    //console.log(this.food);
+                    this.food += "好好吃";
+                    this.info += "1";
+                },
+                add: function () {
+
+                    if (this.num >= 5) {
+                        alert("別點了，到頭了");
+                        return;
+                    }
+                    this.num += 1;
+                },
+                sub: function () {
+
+                    if (this.num <= 0) {
+                        alert("別點了，沒有了");
+                        return;
+                    }
+                    this.num -= 1;
+                },
+                changeIsShow: function () {
+                    this.isShow = !this.isShow;
+                },
+
+                toggleActive: function () {
+                    this.isActive = !this.isActive;
+
+                }
+
+
+            },
+
+        })
+    </script>
+</body>
+
+</html>
