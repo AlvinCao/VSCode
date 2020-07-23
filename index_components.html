@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <title>components组件化</title>
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- 3、使用组件 -->
+        <mycpn></mycpn>
+    </div>
+
+
+    <!-- 对应组件化方法3 注意类型text/x-template-->
+    <!-- <script type="text/x-template" id="cnp">
+<div>
+    <h2>我是标题3</h2>
+    <p>我是内容3</p>
+</div>
+</script> -->
+
+    <template id="cnp">
+        <div>
+            <!--注意： 组件不可访问Vue中的data，但可以在组件对象中有一个dada,只不过该data必须为函数 -->
+            <h2>{{title}}</h2>
+            <p>我是内容4</p>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+        //方法1：
+        //1、创建组件构造器对象
+        const cpnC = Vue.extend({
+            template: '<div><h2>我是标题</h2><p>我是内容1</p><p>我是内容2</p></div>'
+        })
+        // //2、注册组件(全局组件)
+        // Vue.component('mycpn', cpnC)
+
+        //方法2：
+        // Vue.component('mycpn', {
+        //     template: '<div><h2>我是标题2</h2><p>我是内容，哈哈哈</p><p>我是内容，呵呵呵</p></div>'
+        // })
+
+        //方法3：
+        Vue.component('mycpn', {
+            template: "#cnp",
+            data:function(){//必须为函数
+                return{
+                    title:"我是标题4-1"
+                }
+            }
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            // //局部组件
+            // components:{
+            //     mycpn:cpnC
+            // },
+            computed: {
+
+
+            },
+            methods: {
+
+            },
+
+        })
+    </script>
+</body>
+
+</html>
