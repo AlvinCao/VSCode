@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <title>components父子通信</title>
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+       <!-- 父组件模板 -->
+    <div id="app">
+       
+        请看Console
+        <br>
+          
+        <br>
+        <button @click="paramsClick(123,$event)">测试v-on多参数</button>
+        <br>
+     
+        <br>
+        <mycpn v-on:itemclick="mycpnclick"></mycpn>
+
+    </div>
+    <!-- 子组件模板 -->
+    <template id="c-cpn">
+        <div>
+           <button v-for="item in categories" @click=btnclick(item)>{{item.name}}</button>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+        //子组件
+        //子传父
+        const mycpn = {
+            template: "#c-cpn",
+            data() {//data必须为函数
+                return {
+                    categories: [
+                        { id: 'aa', name: '热门推荐' },
+                        { id: 'bb', name: '手机数码' },
+                        { id: 'cc', name: '家用家电' },
+                        { id: 'dd', name: '电脑办公' },
+                    ]
+                }
+            },
+            methods: {
+                btnclick(item){
+                    console.log("子组件打印："+item);
+                    
+                    //发射事件
+                    this.$emit('itemclick',item)
+                }
+            }
+        }
+
+
+        //父组件
+        const app = new Vue({
+            el: "#app",
+            data: {
+                message: "父组件-消息",
+                movies2: ['父组件-海王', '父组件-海贼王', '父组件-海尔兄弟']
+            },
+            components: {
+                mycpn
+            },
+            computed: {
+
+            },
+            methods: {
+                //接收事件
+                mycpnclick(item){
+                    console.log("父组件打印："+item);
+
+                },
+                paramsClick(param1,param2){
+                    console.log(param1);
+                    console.log(param2);
+                }
+            },
+
+        })
+
+    </script>
+</body>
+
+</html>
